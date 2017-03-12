@@ -4,3 +4,6 @@ show_info: true
 twitter_url: https://twitter.com/DelongGao
 google_analytics:
 theme:
+gems:
+  - jekyll-paginate
+paginate: 5
