@@ -5,5 +5,5 @@ layout: default
 
 - [Learning Notes](posts).
 - [Working Notes]()
-- [Nand2Tetris](https://delonggao.github.io/nand2tetris/02/)
+- [Nand2Tetris](https://delonggao.github.io/nand2tetris/)
 
