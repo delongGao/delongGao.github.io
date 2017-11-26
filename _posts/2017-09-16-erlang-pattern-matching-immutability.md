@@ -1,3 +1,10 @@
+---
+layout: default
+title:  "Some Erlang learning notes"
+date:   2017-09-16 16:16:01 -0600
+categories: learning_notes erlang
+---
+
 ### Immutability
 - All the values are immutable by default, variables or literals
 - variables can be assigned exactly once
