@@ -12,7 +12,7 @@ categories: working_journals canvas
 
 Sequences alignment result could be treated as a `m * n` 2-d array of bases("letters"), where `m` is the number of sequences being aligned and `n` is the number of bases of the aligned sequence. `n` is also going to be the length of the longest sequence of the original ones, because the shorter ones from the original sequences will be supplemented with `"-"`.
 
-### Potential Difficulties?
+### Potential Difficulties
 
 - We need to have a good experience / performance for potentially large `m` and `n`
 - Single base needs to have individual visualization and interaction
@@ -59,6 +59,7 @@ To elaborate on the idea further, here are some logic diagram and some code samp
 ![code logic](/assets/images/visualizing-large-dataset-with-canvas/code_logic.png "Code Logic")
 
 - `scroll_handler`
+
 ```javascript
 scroll_handler: function() {
   // other scroll operations...
@@ -78,7 +79,9 @@ scroll_handler: function() {
   }
 }
 ```
+
 - `reach_buffer_boundary`
+
 ```javascript
 reach_left_boundary: function() {
   var active_boundary = AlignmentVisualPositions.current_active_boundary,
@@ -97,7 +100,9 @@ reach_buffer_boundary: function() {
             AlignmentVisualPositions.reach_bottom_boundary();
 }
 ```
+
 - `update_active_boundary`
+
 ```javascript
 update_active_horizontal_boundary: function(position) {
   var active_boundary = AlignmentVisualPositions.current_active_boundary;
@@ -113,7 +118,9 @@ update_active_boundary: function(position) {
   AlignmentVisualPositions.update_active_vertical_boundary(position);
 }
 ```
+
 - `update_buffer_boundary`
+
 ```javascript
 update_buffer_horizontal_boundary: function(position) {
   AlignmentVisualPositions.update_active_horizontal_boundary(position);
@@ -130,14 +137,17 @@ update_buffer_horizontal_boundary: function(position) {
 }
 
 update_buffer_boundary: function(position) {
-  AlignmentVisualPositions.alignment_length_max = EntropyHeatmap.bucket_count; // max number of positions for a single sequence
+  // max number of positions for a single sequence
+  AlignmentVisualPositions.alignment_length_max = EntropyHeatmap.bucket_count;
   AlignmentVisualPositions.sequence_count_max = AlignmentSequences.sequence_count;
 
   AlignmentVisualPositions.update_buffer_horizontal_boundary(position);
   AlignmentVisualPositions.update_buffer_vertical_boundary(position);
 },
 ```
+
 - `refresh`
+
 ```javascript
 refresh: function() {
   // other operations to setting up loading environment...
