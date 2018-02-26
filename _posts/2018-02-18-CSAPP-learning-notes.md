@@ -21,4 +21,14 @@ categories: learning_notes CSAPP
   - 64t: 8 bytes
   - NOTE: be aware of the difference on word size: 32 vs. 64
 
-
+========================== 2018/02/25 ===========================
+- unsigned numbers
+  - Umin: 0b0000...0000 (all zeros)
+  - Umax: 0b1111...1111 (all ones)
+- signed numbers (two's complement)
+  - MSB is sign bit, has negative weight
+  - Tmin: 0b10000...0000 (all zeros EXCEPT first / sign bit)
+  - Tmax: 0b01111...1111 (all ones EXCEPT first / sign bit)
+- casting(type conversion between the two)
+  - At least in C, the conversion happens at bit level
+  - For both U2T and T2U, it converts to bit patterns first and use target way of interpreting bits
