@@ -5,6 +5,37 @@ date:   2018-02-18 15:10:01 -0600
 categories: learning_notes CSAPP
 ---
 
+========================== 2018/02/26 ===========================
+- unsigned to two's complment conversion
+  - T2Uw(x):
+    - x < 0: `2^w + x`
+    - x >= 0: `x`
+  - U2Tw(x):
+    - x <= TMax: `x`
+    - x > TMax: `x - 2^w`
+  - In C
+    - explicitly: casting, ex:
+      ```c
+      unsigned x = 12;
+      (int) x
+      ```
+      this could also happen with `printf`
+    - implicitly:
+      - assign expression with one type to another:
+      ```c
+      unsigned x = 12;
+      int y = x;
+      ```
+      - promotion rule: when two sides of the operator have different type, convert to unsigned, this also works the same for arithmetic operators:
+      ```c
+      2 < 8u // this will be converted to unsigned
+      ```
+  - bit extension
+    - unsigned: zero extension - padding left with zeros
+    - signed: sign extension - padding left with sign bit
+    - both operations preserve the original value
+    - combine type conversion and shifting, we could write some functions to extract bits with either zero extension or sign extension. Examples on __P116__
+
 ========================== 2018/02/25 ===========================
 - unsigned numbers
   - Umin: 0b0000...0000 (all zeros)
