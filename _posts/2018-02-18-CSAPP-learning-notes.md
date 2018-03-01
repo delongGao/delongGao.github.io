@@ -6,6 +6,23 @@ categories: learning_notes CSAPP
 ---
 
 ========================== 2018/02/26 ===========================
+- truncate numbers to `k` bits
+  - unsigned: `num % (2 ^ k)`
+  - two's complement: `U2T(num % (2 ^ k))` - be aware of negative numbers with modulo.
+- unsigned addition:
+  - `unsigned x, y of w bits`
+  - `x + y <> 2 ^ w`: normal situation, no overflow. `x + y >= sum`
+  - `2 ^ w <= x + y < 2 ^ (w+1)`: overflow, `x + y < sum`
+  - this is basically raw addition with a truncate for overflow
+  - principle for overflow detection:
+  ```c
+  int is_overflow(unsigned x, unsigned y) {
+    unsigned sum = x + y;
+    return sum < x;
+  }
+  ```
+
+========================== 2018/02/26 ===========================
 - unsigned to two's complment conversion
   - T2Uw(x):
     - x < 0: `2^w + x`
