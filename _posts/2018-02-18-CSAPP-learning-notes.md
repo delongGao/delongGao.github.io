@@ -5,7 +5,33 @@ date:   2018-02-18 15:10:01 -0600
 categories: learning_notes CSAPP
 ---
 
-========================== 2018/02/26 ===========================
+========================== 2018/03/03 ===========================
+- two's complement addition
+  - it's using the same bit pattern for addition as unsigned and then at the last step convert the unsigned result to two's complement. Based on the book, for lots of systems, they are actually using the same machine instruction for signed and unsigned addition.
+  - `Tadd = B2U(T2B(x) + T2B(y))`
+  - One very important property of this is: if you are performing Tadd for multiple two's complement integers, it only performs the conversion at the last step, which means you could have overflows for intermediary results, but still get the same results at the last step. This is why `x + y - y` is always going to be `x`, because even if `x + y` is possible to overflow, it will not be truncated in the middle
+  - Detecting overflow
+    - two types of overflows:
+      - negative overflow: `x >= 0, y >= 0, x + y < 0`
+      - positive overflow: `x < 0, y < 0, x + y > 0`
+    - detecting: basically detecting none of above two types overflows happened
+  - Special case for `Tmin`:
+    - one of the exercise question:
+    ```
+    what's the problem of using two's complement add overflow detection to detect overflows of two's complement subtract?
+    ```
+    - the problematic value in this case is `Tmin`, the reason is: `-Tmin = Tmin`. This could be explained in the following ways:
+      - Approach 1: for two's complement `-x = ~x + 1`, in the case if `Tmin`, for example of `w = 4`:
+      ```
+      Tmin(w=4) = x = 0b1000
+      ~x = 0b0111 (Tmax)
+      ~x + 1 = 0b1000 = Tmin
+      ```
+      - Approach 2: by definition, x + (-x) = 0, for w = 4, possible value range is - 2 ^ 3 ~ 2 ^ 3 - 1, `Tmin` = `-8`, the only possible value to meet the condition of `x + (-x) = 0` is `Tmin` itself (with a overflow).
+    - as a result, when using Tmin to detect subtract overflow, with two `Tmin`s, add overflow will be true, whereas subtract overflow should be false.
+
+
+========================== 2018/03/01 ===========================
 - truncate numbers to `k` bits
   - unsigned: `num % (2 ^ k)`
   - two's complement: `U2T(num % (2 ^ k))` - be aware of negative numbers with modulo.
